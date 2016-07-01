@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
-    "serve": "1.4.0"
+    "micro-list": "latest"
   },
   "scripts": {
-    "start": "serve ."
+    "start": "list ."
   }
 }
