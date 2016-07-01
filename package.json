@@ -1,0 +1,11 @@
+{
+  "name": "hyperterm-website",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "serve": "1.4.0"
+  },
+  "scripts": {
+    "start": "serve ."
+  }
+}
