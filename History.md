@@ -2,8 +2,9 @@
 0.2.1 / 2016-07-03
 ==================
 
-  * reduce caching interval
-  * rename `data.json` to `updates.json`
+  * Added changelog for `0.2.1` release
+  * Reduce caching interval
+  * Rename `data.json` to `updates.json`
 
 0.2.0 / 2016-07-03
 ==================
