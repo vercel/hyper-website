@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "",
   "dependencies": {
-    "micro-list": "latest"
+    "http-server": "latest"
   },
   "scripts": {
-    "start": "list ."
+    "start": "http-server -c 5 -d ."
   }
 }
