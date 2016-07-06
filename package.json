@@ -1,11 +1,11 @@
 {
   "name": "hyperterm-website",
   "version": "0.0.1",
-  "description": "",
+  "description": "The official website for hyperterm",
   "dependencies": {
-    "http-server": "latest"
+    "micro-list": "latest"
   },
   "scripts": {
-    "start": "http-server -c 5 -d ."
+    "start": "list . -c 5"
   }
 }
