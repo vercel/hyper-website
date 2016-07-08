@@ -7,10 +7,9 @@
 
 body {
   background: #000;
-  color: #fff;
+  color: #eee;
   font-family: Menlo;
   font-size: 12px;
-  color: #eee;
   display: flex;
   align-items: center;
   justify-content: center;
