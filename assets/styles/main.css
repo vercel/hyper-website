@@ -1,16 +1,25 @@
-body {
-  background: #000;
-  color: #fff;
-  font-family: Menlo;
-  font-size: 12px;
-  color: #eee;
-}
+/* ==========================================================================
+   Resets
+   ========================================================================== */
 
 * {
   margin: 0;
   padding: 0;
   text-rendering: geometricPrecision;
   box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: #eee;
+  font-family: Menlo;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
 }
 
 a {
@@ -28,9 +37,17 @@ a:hover {
 
 p {
   margin: 5px 0;
+  text-align: center;
 }
 
-ul {
+h1 {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 16px;
+}
+
+span {
+  font-size: 16px;
 }
 
 ul li {
@@ -49,23 +66,69 @@ p::before {
   margin-right: 10px;
 }
 
+/* ==========================================================================
+   Header
+   ========================================================================== */
+
+.small {
+  font-size: .75rem;
+}
+
+.logo {
+  text-align: center;
+  margin-top: 110px;
+}
+
 .title::after {
   content: ' ';
   border: 1px solid #F81CE5;
   display: inline-block;
   width: 5px;
-  height: 12px;
+  height: 14px;
   position: relative;
   top: 3px;
   left: 2px;
 }
 
+.btns {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 8.75rem;
+  height: 3.5rem;
+  border: 1px solid #3A5685;
+  border-radius: 3px;
+  color: #FFF;
+  text-decoration: none;
+  text-align: center;
+  transition: border-color .100 ease, background-color .100 ease;
+  margin: 10px auto;
+}
+
+.btn-feedback {
+  border: none;
+  background-image: linear-gradient(-180deg, #ea97e3 0%, #af66a9 100%)
+}
+
+/*  Main
+   ========================================================================== */
+
 .main {
   margin: 80px;
 }
 
-.date {
-  color: #999;
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+
+.footer {
+  margin: 20px auto;
 }
 
 .zeit {
@@ -77,6 +140,10 @@ p::before {
   font-size: 15px;
   margin-right: 3px;
 }
+
+/* ==========================================================================
+   Responsive
+   ========================================================================== */
 
 @media screen and (max-width: 500px) {
   .main {
