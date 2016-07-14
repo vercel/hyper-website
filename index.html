@@ -144,18 +144,6 @@
         margin: auto;
       }
 
-      @media screen and (max-width: 700px) {
-        #video video {
-          display: none;
-        }
-
-        #video {
-          margin-top: 20px;
-          background: no-repeat center url('https://cdn.zeit.co/hyperterm/video.gif');
-          background-size: 100%;
-        }
-      }
-
       #content {
         max-width: 800px;
         margin: auto;
@@ -177,7 +165,7 @@
         font-weight: bold;
         color: #ccc;
         margin: 0 0 30px 0;
-        padding-top: 50px;
+        padding-top: 30px;
       }
 
       #content h2 a, #content h3 a {
@@ -289,14 +277,66 @@
       #content p b {
         color: #fff;
       }
+
+      @media screen and (max-width: 700px) {
+        #header {
+          text-align: center;
+          padding: 20px 0;
+          position: static;
+        }
+
+        #video video {
+          display: none;
+        }
+
+        #video {
+          background: no-repeat center url('https://cdn.zeit.co/hyperterm/video.gif');
+          background-size: 100%;
+          height: 100vh;
+        }
+
+        #content {
+          padding: 20px;
+        }
+
+
+        pre {
+          white-space:pre-wrap; word-wrap:break-word; overflow:auto;
+        }
+
+        #content table {
+          margin: 0;
+        }
+
+        #content table td {
+          width: 50% !important;
+        }
+
+        #content table td:last-child {
+          display: none;
+        }
+
+        #content .table-note:after {
+          margin: 15px 0;
+          content: "Please note: the complete table information is available in bigger resolutions!";
+          display: block;
+          color: #999;
+        }
+
+        #content img {
+          max-width: 100%;
+          height: auto;
+        }
+      }
     </style>
   </head>
   <body>
     <div id="main">
       <div id="header">
-        <span>License: <b>MIT</b></span>
+        <span><a target="_blank" href="https://zeit.co">&#9650;</a></span>
         <span><a target="_blank" href="https://github.com/zeit/hyperterm/releases">Changelog</a></span>
         <span><a target="_blank" href="https://github.com/zeit/hyperterm">Github</a></span>
+        <span>License: <b>MIT</b></span>
       </div>
 
       <div id="top">
@@ -416,6 +456,7 @@
             </tr>
           </tbody>
         </table>
+        <span class="table-note"></span>
 
         <h2 id="extensions-api"><a href="#extensions-api">Extensions API</a></h2>
 
@@ -712,6 +753,7 @@
             </tr>
           </tbody>
         </table>
+        <span class="table-note"></span>
 
         <h3 id="extensions-module-loading"><a href="#extensions-module-loading">Module loading</a></h3>
 
