@@ -1,73 +1,1018 @@
 <!doctype html>
 <html>
   <head>
-    <title>hyperterm</title>
+    <title>HyperTerm</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="initial-scale=1.0" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:site" content="@zeithq" />
-    <meta name="og:title" content="hyperterm" />
+    <meta name="og:title" content="HyperTerm" />
     <meta name="og:url" content="https://hyperterm.now.sh" />
-    <meta name="description" content="hyperterm: HTML/JS/CSS terminal" />
-    <meta name="og:description" content="hyperterm: HTML/JS/CSS terminal" />
-    <meta name="og:image" content="https://hyperterm.now.sh/assets/card.png" />
-    <link rel="stylesheet" href="assets/styles/main.css">
+    <meta name="description" content="HyperTerm: HTML/JS/CSS terminal" />
+    <meta name="og:description" content="HyperTerm: HTML/JS/CSS terminal" />
+    <meta name="og:image" content="https://hyperterm.now.sh/static/card.png" />
+    <link rel="dns-prefetch" href="https://cdn.zeit.co" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        text-rendering: geometricPrecision;
+        box-sizing: border-box;
+      }
+
+      body, html {
+        background: #000;
+        color: #ccc;
+        font: 12px Menlo, "DejaVu Sans Mono", "Lucida Console", monospace;
+      }
+
+      #header {
+        position: fixed;
+        top: 15px;
+        right: 20px;
+        z-index: 10000;
+      }
+
+      #header span {
+        color: #999;
+        font-family: -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans",
+          "Droid Sans", "Helvetica Neue", sans-serif;
+        display: inline-block;
+        margin-right: 10px;
+      }
+
+      #header a {
+        color: #999;
+        text-decoration: none;
+      }
+
+      #header a:hover {
+        color: #FF2E88;
+      }
+
+      #logo {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        padding: 50px 0 40px;
+        font-family: -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans",
+          "Droid Sans", "Helvetica Neue", sans-serif;
+        text-align: center;
+      }
+
+      #logo img {
+        display: block;
+        margin: 0 auto 10px;
+      }
+
+      #logo .title, #logo .subtitle {
+        padding: 3px 0;
+      }
+
+      #logo .title {
+        font-size: 18px;
+      }
+
+      #logo .title b {
+        font-weight: 500;
+      }
+
+      #logo .subtitle {
+        color: #9B9B9B;
+      }
+
+      #top {
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+        text-align: center;
+      }
+
+      #video {
+        height: 800px;
+        bottom: 0;
+        width: 100%;
+        position: absolute;
+      }
+
+      #video video {
+        margin: auto;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+      }
+
+      #loading:before {
+        content: 'Loading...';
+        position: absolute;
+        display: 'block';
+        left: 0;
+        top: 50%;
+        right: 0;
+        color: #666;
+        opacity: 0;
+        animation-name: appear;
+        animation-delay: 2s;
+        animation-duration: 500ms;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes appear {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      #poster {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      #poster img {
+        margin: auto;
+      }
+
+      @media screen and (max-width: 700px) {
+        #video video {
+          display: none;
+        }
+
+        #video {
+          margin-top: 20px;
+          background: no-repeat center url('https://cdn.zeit.co/hyperterm/video.gif');
+          background-size: 100%;
+        }
+      }
+
+      #content {
+        max-width: 800px;
+        margin: auto;
+      }
+
+      #content a {
+        color: #FF2E88;
+        text-decoration: none;
+        border-bottom: 1px solid #FF2E88;
+      }
+
+      #content a:hover {
+        background: #FF2E88;
+        color: #fff;
+      }
+
+      #content h2, #content h3 {
+        font-size: 12px;
+        font-weight: bold;
+        color: #ccc;
+        margin: 0 0 30px 0;
+        padding-top: 50px;
+      }
+
+      #content h2 a, #content h3 a {
+        color: #ccc;
+        border-bottom-width: 0;
+      }
+
+      #content p {
+        margin: 0 0 20px;
+        line-height: 18px;
+      }
+
+      #content h2:before {
+        content: '## ';
+      }
+
+      #content h3:before {
+        content: '### ';
+      }
+
+      #content code {
+        font: 12px Menlo, "DejaVu Sans Mono", "Lucida Console", monospace;
+      }
+
+      #content p code, #content li code, #content td code {
+        color: #fff;
+      }
+
+      #content p code:before, #content p code:after,
+      #content td code:before, #content td code:after,
+      #content li code:before, #content li code:after {
+        content: '`';
+      }
+
+      #content pre {
+        margin: 30px;
+        color: #50E3C2;
+        line-height: 18px;
+      }
+
+      #content table thead td {
+        color: #999;
+        font-size: 10px;
+      }
+
+      #content table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 30px;
+      }
+
+      #content td > table {
+        margin: 0;
+      }
+
+      #content table td {
+        vertical-align: top;
+        border: 1px solid #444;
+        line-height: 15px;
+      }
+
+      #content td {
+        padding: 10px;
+      }
+
+      #content table.config td:nth-child(2) {
+        width: 30%;
+        color: #999;
+      }
+
+      #content table.config tbody td:first-child {
+        color: #fff;
+      }
+
+      #content table.api tbody td:first-child {
+        color: #fff;
+      }
+
+      #content table.api > tbody > tr > td:nth-child(2) {
+        width: 13%;
+      }
+
+      #content table.api tbody tbody td:first-child {
+        width: 20%;
+      }
+
+      #content td > p:first-child {
+        margin-top: 0;
+      }
+
+      #content ul {
+        margin: 20px 10px;
+      }
+
+      #content ul li {
+        list-style-type: none;
+        line-height: 18px;
+        margin: 5px 0;
+        padding-left: 20px;
+      }
+
+      #content ul li:before {
+        content: '-';
+        color: #999;
+        position: absolute;
+        margin-left: -20px;
+      }
+
+      #content p b {
+        color: #fff;
+      }
+    </style>
   </head>
   <body>
-    <div class="main">
-      <div class="logo"><img src="assets/logo.gif" width="230" height="202" /></div>
-      <p class="title"><b>hyper</b>term - HTML/JS/CSS Terminal</p>
-      <p>Version: <b>0.3.1</b>. <a href="https://github.com/zeit/hyperterm/releases/download/0.3.1/hyperterm-macos-x64-0.3.1.zip">Download</a> (macOS).</p>
-      <p>License: <b>MIT</b>. Source:
-      <a href="https://github.com/zeit/hyperterm" target="_blank">app</a>,
-      <a href="https://github.com/zeit/hyperterm-website" target="_blank">website</a> &amp;
-      <a href="https://github.com/zeit/hyperterm-art" target="_blank">art</a>.</p>
-      <p>Feedback? Please file an <a href="https://github.com/zeit/hyperterm/issues" target="_blank">issue</a>.</p>
-      <p></p>
-      <p><b>Changelog</b>:</p>
-      <p></p>
-      <p><b>0.3.1</b> <span class="date">(07/04/2016)</span></p>
+    <div id="main">
+      <div id="header">
+        <span>License: <b>MIT</b></span>
+        <span><a target="_blank" href="https://github.com/zeit/hyperterm/releases">Changelog</a></span>
+        <span><a target="_blank" href="https://github.com/zeit/hyperterm">Github</a></span>
+      </div>
+
+      <div id="top">
+        <div id="loading"></div>
+        <div id="logo">
+          <img src="https://cdn.zeit.co/hyperterm/logo.gif" width="64" height="56" />
+          <div class="title"><b>Hyper</b>Term</div>
+        </div>
+        <div id="video">
+          <video id="vid" src="https://cdn.zeit.co/hyperterm/video.mp4" width="100%" height="650" autoplay />
+        </div>
+      </div>
+
+      <div id="content">
+        <h2 id="installation"><a href="#installation">Installation</a></h2>
+        <p><a href="https://hyperterm-updates.now.sh/download/osx">Download</a> for macOS.
+        Builds for Windows and Linux are coming very soon!</p>
+
+        <h2 id="hashtag-goals"><a href="#hashtag-goals">Project goals</a></h2>
+
+        <p> The goal of the project is to create a beautiful and extensible experience 
+        for command-line interface users, built on open web standards.</p>
+        
+        <p>In the beginning, our focus will be primarily around speed, stability and
+        the development of the correct API for extension authors.</p>
+
+        <p>In the future, we anticipate the  community will come up with
+        innovative additions to enhance what could be the simplest,
+        most powerful and well-tested interface for productivity.</p>
+
+        <h2 id="extensions"><a href="#extensions">Extensions</a></h2>
+
+        <p>Extensions are available on npm. We encourage everyone to
+        include <code>hyperterm</code> in the <code>keywords</code>
+        field in <code>package.json</code>.</p>
+
+        <pre><code>$ npm search hyperterm</code></pre>
+
+        <p>Then edit <code>~/.hyperterm.js</code> and add it to <code>plugins</code></p>
+
+        <pre><code>module.exports = {
+
+  config: { /*... */ },
+
+  plugins: [
+    <b>"hyperpower"</b>
+  ]
+
+};</code></pre>
+
+        <p>Hyperterm will show a notification when your modules are
+        installed to <code>~/.hyperterm_plugins`</code>.</p>
+
+        <h2 id="config"><a href="#"config">Configuration</a></h2>
+
+        <p>The <code>config</code> object seen above in <code>~/.hyperterm.js</code>
+        admis the following</p>
+
+        <table class="config">
+          <thead>
+            <tr>
+              <td>Property</td>
+              <td>Default</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>"fontSize"</td>
+              <td>11</td>
+              <td>The default size in pixels for the terminal</td>
+            </tr>
+            <tr>
+              <td>"fontFamily"</td>
+              <td>"Menlo, DejaVu Sans Mono, Lucida Console, monospace"</td>
+              <td>The font family to use with optional fallbacks</td>
+            </tr>
+            <tr>
+              <td>"cursorColor"</td>
+              <td>"#F81CE5"</td>
+              <td>The color of the caret in the terminal</td>
+            </tr>
+            <tr>
+              <td>"foregroundColor"</td>
+              <td>"#fff"</td>
+              <td>The color of the main text of the terminal</td>
+            </tr>
+            <tr>
+              <td>"backgroundColor"</td>
+              <td>"#000"</td>
+              <td>The color of the window and main terminal background</td>
+            </tr>
+            <tr>
+              <td>"borderColor"</td>
+              <td>"#333"</td>
+              <td>The color of the main window border and tab bar</td>
+            </tr>
+            <tr>
+              <td>"css"</td>
+              <td>""</td>
+              <td>Custom CSS to include in the main window</td>
+            </tr>
+            <tr>
+              <td>"termCSS"</td>
+              <td>""</td>
+              <td>Custom CSS to include in the terminal window</td>
+            </tr>
+            <tr>
+              <td>"padding"</td>
+              <td>"12px 14px"</td>
+              <td>CSS padding values for the space around each term</td>
+            </tr>
+            <tr>
+              <td>"colors"</td>
+              <td>["#000000", "#ff0000", ...]</td>
+              <td>A list of overrides for the color palette</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 id="extensions-api"><a href="#extensions-api">Extensions API</a></h2>
+
+        <p>Extensions are universal Node.js modules loaded by both
+        Electron and the renderer process.</p>
+
+        <p>The extension system is designed around <b>composition</b>
+        of the APIs we use to build the terminal: <code>React</code>
+        components and <code>Redux</code> actions.</p>
+
+        <p>Instead of exposing a custom API method or parameter for
+        every possible customization point, we allow you to intercept
+        and compose every bit of functionality!</p>
+
+        <p>The only knowledge that is therefore required to successfully 
+        extend <code>HyperTerm</code> is that of its underlying open
+        source libraries.</p>
+
+        <p>Your module has to expose at least one of these methods:.</p>
+
+        <table class="api">
+          <thead>
+            <tr>
+              <td>Method</td>
+              <td>Invoked from</td>
+              <td>Description</td>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code>onApp</code></td>
+              <td>Electron</td>
+              <td>
+                <p>Invoked when the app first loads. If a plugin reloads,
+                it's invoked again with the existing app.</p>
+                <p>Parameters:</p> 
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>app</code></td>
+                      <td>The electron app.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onWindow</code></td>
+              <td>Electron</td>
+              <td>
+                <p>Invoked when each window is created. If a plugin reloads,
+                it's invoked again with the existing windows.</p>
+                <p>Parameters:</p> 
+                <table>
+                  <tbody>
+                  <tr>
+                    <td><code>window</code></td>
+                    <td>An electron <code>BrowserWindow</code>.</td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onUnload</code></td>
+              <td>Electron</td>
+              <td>
+                <p>Invoked when a plugin is removed by the user.</p>
+                <p>Parameters:</p> 
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>app</code></td>
+                      <td>The electron app.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><code>decorateMenu</code></td>
+              <td>Electron</td>
+              <td>
+                <p>Invoked with the Electron's <code>Menu</code> template.
+                If a plugin reloads, it's called again and the menu
+                is refreshed.</p>
+                <p>Parameters:</p> 
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>menu</code></td>
+                      <td>The menu template object</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onRendererLoad</code></td>
+              <td>Renderer</td>
+              <td>
+                <p>Invoked when a plugin is first loaded or subsequently
+                reloaded in each window.</p>
+                <p>Parameters:</p> 
+                <table>
+                  <tr>
+                    <tbody>
+                      <td><code>window</code></td>
+                      <td>The window object</td>
+                    </tbody>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><code>onRendererUnload</code></td>
+              <td>Renderer</td>
+              <td>
+                <p>Invoked when a plugin is being unloaded.</p>
+                <p>Parameters:</p> 
+                <table>
+                  <tr>
+                    <tbody>
+                      <td><code>window</code></td>
+                      <td>The window object</td>
+                    </tbody>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><code>middleware</code></td>
+              <td>Renderer</td>
+              <td>
+                <p>A custom Redux middleware that can intercept any
+                action. Subsequently we invoke the <code>thunk</code>
+                middleware, which means your middleware can
+                <code>next</code> thunks.</p>
+              </td>
+            </tr>
+            <tr>
+              <td><code>reduceUI</code><br><code>reduceSessions</code></td>
+              <td>Renderer</td>
+              <td>
+                <p>A custom reducer for the <code>ui</code> state shape.</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>state</code></td>
+                      <td>The Redux state object</td>
+                    </tr>
+                    <tr>
+                      <td><code>action</code></td>
+                      <td>The action object</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>getTermProps</code>
+              </td>
+              <td>Renderer</td>
+              <td>
+                <p>Passes down props from <code>&lt;Terms&gt;</code>
+                to the <code>&lt;Term&gt;</code> component. Must return
+                the composed props object.</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>uid</code></td>
+                      <td>Term uid</td>
+                    </tr>
+                    <tr>
+                      <td><code>parentProps</code></td>
+                      <td>Props form the parent component.</td>
+                    </tr>
+                    <tr>
+                      <td><code>props</code></td>
+                      <td>The existing properties that will be
+                      passed to the component.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>getTabsProps</code>
+              </td>
+              <td>Renderer</td>
+              <td>
+                <p>Passes down props to <code>&lt;Tabs&gt;</code>
+                to the <code>&lt;Header&gt;</code> component. Must return
+                the composed props object.</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>parentProps</code></td>
+                      <td>Props form the parent component.</td>
+                    </tr>
+                    <tr>
+                      <td><code>props</code></td>
+                      <td>The existing properties that will be
+                      passed to the component.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>getTabProps</code>
+              </td>
+              <td>Renderer</td>
+              <td>
+                <p>Passes down props to <code>&lt;Tab&gt;</code>
+                to the <code>&lt;Tabs&gt;</code> component. Must return
+                the composed props object.</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>uid</code></td>
+                      <td>Tab / Term uid</td>
+                    </tr>
+                    <tr>
+                      <td><code>parentProps</code></td>
+                      <td>Props form the parent component.</td>
+                    </tr>
+                    <tr>
+                      <td><code>props</code></td>
+                      <td>The existing properties that will be
+                      passed to the component.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>mapHyperTermDispatch</code><br>
+                <code>mapTermsDispatch</code><br>
+                <code>mapHeaderDispatch</code><br>
+                <code>mapNotificationsDispatch</code>
+              </td>
+              <td>Renderer</td>
+              <td>
+                <p>A custom mapper for the dispatch properties. Must
+                return an extended object of the map passsed.</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>dispatch</code></td>
+                      <td>The Redux dispatch function</td>
+                    </tr>
+                    <tr>
+                      <td><code>map</code></td>
+                      <td>The existing map of properties that will be
+                      passed ot the component.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <code>decorateHyperTerm</code><br>
+                <code>decorateTerms</code><br>
+                <code>decorateTerm</code><br>
+                <code>decorateHeader</code><br>
+                <code>decorateTabs</code><br>
+                <code>decorateTab</code>
+              </td>
+              <td>Renderer</td>
+              <td>
+                <p>Invoked with the <code>React</code> <code>Component</code>
+                to decorate. Must return a Higher Order Component.</p>
+                <p>Parameters:</p> 
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>HyperTerm</code></td>
+                      <td>The <code>React</code> <code>Component</code>
+                      constrctor.</td>
+                    </tr>
+                    <tr>
+                      <td><code>env</code></td>
+                      <td>A collection of useful module references for
+                      building comonents. <a href="#decorating-components">See below</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 id="extensions-module-loading"><a href="#extensions-module-loading">Module loading</a></h3>
+
+        <p>The user can hot-load and hot-reload plugins by pressing 
+        Command + R (refresh). Please strive to make plugins that don't
+        require a complete restart of the application to work.</p>
+
+        <p>In the future we might do this automatically.</p>
+
+        <p>When developing, you can add your plugin to
+        <code>~/.hyperterm_plugins/local</code> and then specify it
+        under the <code>localPlugins</code> array in <code>~/.hyperterm.js</code>.
+
+        We load new plugins:
+        <ul>
+          <li>Periodically (every few hours)</li>
+          <li>When changes are made to the configuration file
+            (<code>plugins</code> or <code>localPlugins</code>)</li>
+          <li>When the user clicks Plugins &gt; Update all now</li>
+        </ul>
+
+        <p>The process of reloading involves</p>
+        <ul>
+          <li>Running <code>npm prune</code> and <code>npm install</code>
+            in <code>~/.hyperterm_plugins</code>.</li>
+          <li>Pruning the <code>require.cache</code> in both electron
+            and the renderer process</li>
+          <li>Invoking <code>on*<code> methods on the existing instances
+          and re-rendering components with the fresh decorations in place.</li>
+        </ul>
+
+        <p>Note: on the main process, plugins are registered as
+        soon as possible (we fire <code>onLoad</code>).
+        On the browser, it's up to the user to trigger their load by
+        pressing command+R. We put the user in control of the loading
+        in this way to prevent them from losing critical work by
+        extensions that reset state or don't preserve it correctly.</p>
+
+        <h3 id="decorating-components"><a href="#decorating-components">Decorating components</a></h3>
+
+        <p>We give you the ability to provide a higher order component
+        for every piece of the <code>HyperTerm</code> UI.<br> Its structure
+        is as follows:</p>
+
+        <pre><code>&lt;HyperTerm&gt;
+  &lt;Header&gt;
+    &lt;Tabs&gt;
+      &lt;Tab /&gt; ...
+    &lt;/Tabs&gt;
+  &lt;Terms&gt;
+    &lt;Term /&gt; ...
+  &lt;/Terms&gt;
+  &lt;Notifications&gt;
+    &lt;Notification /&gt; ...
+  &lt;/Notifications&gt;
+&lt;/HyperTerm&gt;</code></pre>
+
+        <p>All the <code>decorate*</code> methods receive the following
+        references in an object passed as the second parameter:</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><code>React</code></td>
+              <td>The entire React namespace.</td>
+            </tr>
+            <tr>
+              <td><code>notify</code></td>
+              <td>A helper function that shows a desktop notification.
+              The first parameter is the title and the second is the optional
+              body of the notification.</td>
+            </tr>
+            <tr>
+              <td><code>Notification</code></td>
+              <td>The <code>Notification</code> component in case you
+              want to re-use it.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>All the components accept the following two properties
+        to extend their markup:</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><code>customChildren</code></td>
+              <td>An array of <code>Element</code> or a single
+              <code>Element</code> to insert at the bottom
+              of the component.</td>
+            </tr>
+            <tr>
+              <td><code>customChildrenBefore</code></td>
+              <td>The same as <code>customChildren</code>, but inserted
+              as the first child element(s) of the component.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>We encourage you to maintain compatibility with other decorators.
+        Since many can be set, don't assume that yours is the only one.
+        For example, if you're passing children, compose potential existing
+        values:</p>
+
+        <pre><code>render () {
+  const customChildren = Array.from(this.props.customChildren)
+    .concat(&lt;p&gt;My new child&lt;/p&gt;);
+  return &lt;Tab {...this.props} customChidren={customChildren} /&gt;
+}</code></pre>
+
+
+        <h3 id="actions-and-effects"><a href="#actions-and-effects">Actions and Effects</a></h3>
+
+        <p>All the <a href="https://github.com/zeit/hyperterm/tree/master/app/lib/actions"
+          target="_blank">redux actions</a> are available for you to
+        handle through your middleware and reducers. For an example, refer to the <a href="#hyperpower">Hyperpower</a> reference plugin.</p>
+
+        <p>Side effects occur in two fundamental forms:</p>
+        <ul>
+          <li>Some actions dispatch other actions based on state.</li>
+          <li>Some actions do async work by communicating over the RPC
+          channel to the main process</li>
+        </ul>
+
+        <p>In all cases, the side effect is passed as
+        the <code>effect</code> key in the action and later handled
+        by our middleware.</p>
+
+        <p>This means that you can override, compose or completely
+        eliminate effects! In other words, this is how you can
+        change the default functionality or behavior of the app.</p>
+
+        <p>As an example, consider the action we use to increase
+        the font size when you press <code>Command+=</code>:</p>
+
+        <pre><code>export function increaseFontSize () {
+  return (dispatch, getState) => {
+    dispatch({
+      type: UI_FONT_SIZE_INCR,
+      effect () {
+        const state = getState();
+        const old = state.ui.fontSizeOverride || state.ui.fontSize;
+        const value = old + 1;
+        dispatch({
+          type: UI_FONT_SIZE_SET,
+          value
+        });
+      }
+    });
+  };
+}</code></pre>
+
+        <h3 id="hterm"><a href="#hterm">The underlying terminal</a></h3>
+
+        <p>HyperTerm achieves a lot of its speed and functionality
+        thanks to the power of <a target="_blank" href="https://github.com/dbkaplun/hterm-umdjs/blob/master/dist/index.js">hterm</a> underneath,
+        the terminal emulator of the Chromium project.</p>
+
+        <p>To access the terminal object, you can supply
+        a <code>onTerminal</code> property to the <code>&lt;Term&gt;</code>
+        component.</p>
+
+        <h3 id="additional-apis"><a href="#additional-apis">Additional APIs</a></h3>
+
+        <p>Electron <code>BrowserWindow</code> objects are extended
+        with the following parameters:</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><code>rpc</code></td>
+              <td>An <code>EventEmitter</code> that allows for communication
+              with the window process.</td>
+            </tr>
+            <tr>
+              <td><code>sessions</code></td>
+              <td>An <code>Array</code> of <code>Session</code>
+              objects which hold the communication with each
+              term's pty..</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>Renderer windows are similarly extended with:</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><code>rpc</code></td>
+              <td>An <code>EventEmitter</code> that allows for communication
+              with the window process.</td>
+            </tr>
+            <tr>
+              <td><code>store</code></td>
+              <td>The Redux <code>Store</code> object. This allows
+              access to <code>dispatch</code> actions or read the global
+              state with <code>getState</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>The <code>rpc</code> object is symmetrical between browser
+        and renderer process. The API is the same as Node.js,
+        with the exception that it only admits a single object
+        as its parameters only:</p>
+
+        <pre><code>win.rpc.emit('hi there', {
+  some: 'payload',
+  any: [
+    'object',
+    'here'
+  ]
+});</code></pre>
+
+        <h3 id="hyperpower"><a href="#hyperpower">Example extension: Hyperpower</a></h3>
+
+        <p>The following extension renders particles are the
+        caret moves:</p>
+
+        <p style="text-align: center"><img src="https://cloud.githubusercontent.com/assets/13041/16820268/13c9bfe6-4905-11e6-8fe4-baf8fc8d9293.gif" width="457" height="340" /></p>
+
+        <p>Let's walk through <a taret="_blank"
+          href="https://github.com/zeit/hyperpower/blob/master/index.js">its code</a>.
+        <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyperterm/tree/master/app/lib/actions">here</a>.</p>
+
+        <pre><code>exports.middleware = (store) => (next) => (action) => {
+  if ('SESSION_ADD_DATA' === action.type) {
+    const { data } = action;
+    if (/bash: wow: command not found/.test(data)) {
+      store.dispatch({
+        type: 'WOW_MODE_TOGGLE'
+      });
+    } else {
+      next(action);
+    }
+  } else {
+    next(action);
+  }
+};</code></pre>
+
+        <p>Notice that we don't re-dispatch the action, which means
+        we never render the output of the command to the terminal. Instead, we dispatch an action of our own, which we grab
+        in the <code>uiReducer</code>and later map:</p>
+
+        <pre><code>exports.reduceUI = (state, action) => {
+  switch (action.type) {
+    case 'WOW_MODE_TOGGLE':
+      return state.set('wowMode', !state.wowMode);
+  }
+  return state;
+};
+
+exports.mapTermsState = (state, map) => {
+  return Object.assign(map, {
+    wowMode: state.ui.wowMode
+  });
+};</code></pre>
+
+        <p>We then want to decorate the <code>&lt;Term&gt;</code> component
+        so that we can access the underlying caret.</p>
+
+        <p>However, <code>&lt;Term&gt;</code> is not a container that
+        we can map props to. So we use <code>getTermProps</code> to
+        pass the property further down:</p>
+
+        <pre><code>exports.getTermProps = (uid, parentProps, props) => {
+  return Object.assign(props, {
+    wowMode: parentProps.wowMode
+  });
+}</code></pre>
+
+      <p>The extension then <a href="https://github.com/zeit/hyperpower/blob/master/index.js#L51" target="_blank">returns</a> a higher order component to
+      wrap <code>&lt;Term&gt;</code>. Notice we pass the <code>onTerminal</code>
+      property to access the underlying hterm object:</p>
+
+      <pre><code>render () {
+  return React.createElement(Term, Object.assign({}, this.props, {
+    onTerminal: this._onTerminal
+  }));
+}</code></pre>
+
+      <h2 id="credits"><a href="#credits">Credits</a></h2>
+
+      <p>Authored by <b>Guillermo Rauch</b> - <a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>.<br />
+      Brought to you by <a href="https://zeit.co"><span style="font-size: 16px">&#9650;</span>ZEIT</a>. Hosted on <a target="_blank" href="https://zeit.co/now">now</a>.</p>
+
+      <p>Special thanks to the following people:</p>
       <ul>
-        <li>upgrade to latest hterm for multiple bug fixes [<a href="https://github.com/dbkaplun" target="_blank">@dbkaplun</a>, <a href="https://github.com/rauchg" target="_blank">@rauchg</a>]</li>
+        <li>Jeff Haynies for his work on polish for general terminal behavior.</li>
+        <li>Nuno Campos for his work on zooming and configuration.</li>
+        <li>Leo Lamprecht and Johan Brook for their excellent UI improvements.</li>
+        <li>Harrison Harnisch for our nice default color palette.</li>
+        <li>Fernando Montoya for his feedback and patches.</li>
+        <li>Matias Tucci for his work on the auto updater.</li>
+        <li>Sebastian Markbage for his insight on the higher-order component extensibility API.</li>
+        <li>Joel Besada for his editor particles <a target="_blank" href="https://github.com/codeinthedark/editor/pull/1">idea</a> and Zero Cho for his reference implementation.</li>
       </ul>
-      <p></p>
-      <p><b>0.3.0</b> <span class="date">(07/04/2016)</span></p>
-      <ul>
-        <li>revamp the menu to be a lot more standard (<a href="https://github.com/zeit/hyperterm/issues/38" target="_blank">#38</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>move menu into its own file and refactor [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>add static icon, move icons to static folder [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>add cross-platform font family settings (<a href="https://github.com/zeit/hyperterm/pull/26" target="_blank">#26</a>) [<a href="https://twitter.com/OlliV" target="_blank">@OlliV</a>, <a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>remove <code>xterm.css</code> (no longer used, smaller build!) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>change font size with command shortcuts (<a href="https://github.com/zeit/hyperterm/pull/34" target="_blank">#34</a>) [<a href="https://twitter.com/jhaynie" target="_blank">@jhaynie</a>]</li>
-        <li>implement a more reasonable update interval check frequency (<a href="https://github.com/zeit/hyperterm/issues/33" target="_blank">#33</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>add standard behavior when you double click window (<a href="https://github.com/zeit/hyperterm/pull/32" target="_blank">#32</a>) [<a href="https://twitter.com/jhaynie" target="_blank">@jhaynie</a>]</li>
-      </ul>
-      <p></p>
-      <p><b>0.2.1</b> <span class="date">(07/03/2016)</span></p>
-      <ul>
-        <li>Improvements to the auto-update system. [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-      </ul>
-      <p></p>
-      <p><b>0.2.0</b> <span class="date">(07/03/2016)</span></p>
-      <ul>
-        <li>Implement Chromium's hterm (<a href="https://github.com/zeit/hyperterm/pull/28" target="_blank">#28</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>Fix "Download" link being clickable when hidden (<a href="https://github.com/zeit/hyperterm/issues/7" target="_blank">#7</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>Jump to beginning of end at edges of tabs when moving sideways (<a href="https://github.com/zeit/hyperterm/issues/22" target="_blank">#22</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>Make clear where to run <code>npm start</code> (<a href="https://github.com/zeit/hyperterm/pull/19" target="_blank">#19</a>) [<a href="https://twitter.com/montogeek" target="_blank">@montogeek</a>]</li>
-        <li>Add fullscreen menu item (<a href="https://github.com/zeit/hyperterm/issues/1" target="_blank">#1</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>, <a href="https://github.com/montogeek" target="_blank">@montogeek</a>]</li>
-        <li>Improve README and scripts (<a href="https://github.com/zeit/hyperterm/pull/15" target="_blank">#15</a>) [<a href="https://twitter.com/lmprht" target="_blank">@lmprht</a>]</li>
-        <li>Add support for cmd+shift+[|] [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>Add dev build instructions to README (<a href="https://github.com/zeit/hyperterm/issues/3" target="_blank">#3</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>Make <code>ctrl+c</code> close  instead of <code>cmd+w</code> (<a href="https://github.com/zeit/hyperterm/issues/2" target="_blank">#2</a>) [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-        <li>Improve <code>zip</code> builds to not include nested directory [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-      </ul>
-      <p></p>
-      <p><b>0.1.0</b> <span class="date">(07/01/2016)</span></p>
-      <ul>
-        <li>Initial release. Hello world. [<a href="https://twitter.com/rauchg" target="_blank">@rauchg</a>]</li>
-      </ul>
-      <p></p>
-      <p class="footer">Brought to you by <a href="https://zeit.co" target="_blank" class="zeit"><span>▲</span>ZEIT</a>. Hosted on <a href="https://now.sh">now</a> (<a href="/_src">source</a>).</p>
     </div>
+
+    <script>
+      document.getElementById('vid').playbackRate = 2;
+    </script>
   </body>
 </html>
