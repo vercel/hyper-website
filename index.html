@@ -98,6 +98,42 @@
         text-align: center;
       }
 
+      #arrow {
+        position: absolute;
+        left: 50%;
+        margin-left: -9px;
+        bottom: 20px;
+        opacity: 0;
+        animation-name: arrow-appear;
+        animation-delay: 5s;
+        animation-duration: 500ms;
+        animation-timing-function: ease;
+        animation-fill-mode: forwards;
+      }
+
+      @keyframes arrow-appear {
+        from {
+          transform: translateY(-20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0px);
+          opacity: .6;
+        }
+      }
+
+      @keyframes arrow-video-finish {
+        from {
+          transform: translateY(-20px);
+          opacity: );
+        }
+        to {
+          transform: translateY(0px);
+          opacity: 1;
+        }
+      }
+
+
       #video {
         height: 80vh;
         bottom: 0;
@@ -364,6 +400,10 @@
           max-width: 100%;
           height: auto;
         }
+
+        #arrow {
+          display: none;
+        }
       }
     </style>
   </head>
@@ -387,6 +427,7 @@
         <div id="video">
           <video id="vid" src="https://cdn.zeit.co/hyperterm/video.mp4" height="100%" autoplay />
         </div>
+        <div id="arrow"><a href="#installation"><img src="static/arrow.svg" width="18" /></a></div>
       </div>
 
       <div id="content">
@@ -1094,6 +1135,10 @@ exports.mapTermsState = (state, map) => {
 
     <script>
       document.getElementById('vid').playbackRate = 1.7;
+      document.getElementById('vid').onended = function () {
+        document.getElementById('arrow').style.animationDelay = '100ms';
+        document.getElementById('arrow').style.animationName = 'arrow-video-finish';
+      }
     </script>
   </body>
 </html>
