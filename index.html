@@ -572,7 +572,7 @@
               <td>
                 <p>Invoked when the app first loads. If a plugin reloads,
                 it's invoked again with the existing app.</p>
-                <p>Parameters:</p> 
+                <p>Parameters:</p>
                 <table>
                   <tbody>
                     <tr>
@@ -610,6 +610,24 @@
                     <tr>
                       <td><code>app</code></td>
                       <td>The electron app.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+            <tr>
+              <td><code>decorateConfig</code></td>
+              <td>Electron / Renderer</td>
+              <td>
+                <p><b>v0.5.0+</b>. Allows you to decorate the user's configuration.<br>
+                Useful for themeing or custom parameters for your
+                plugin.</p>
+                <p>Parameters:</p>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td><code>config</code></td>
+                      <td>The <code>config</code> object</td>
                     </tr>
                   </tbody>
                 </table>
@@ -1046,6 +1064,49 @@
     'object',
     'here'
   ]
+});</code></pre>
+
+        <h3 id="hyperyellow"><a href="#hyperyellow">Example theme: Hyperyellow</a></h3>
+
+        <p>The following extension simply alters the config to add CSS
+        and yellow colors! Here's the <a target="_blank" href="https://github.com/zeit/hyperyellow/blob/29c4ac9748be74d7ad587b7077758ef26f6ce5c2/index.js#L1">code</a>.</p>
+
+        <p style="text-align: center"><img src="static/hyperyellow.gif" width="446" height="333" /></p>
+
+        <p>Themes are simply plugins! Only one hook, <code>decorateConfig</code>
+        is needed:</p>
+
+        <pre><code>exports.decorateConfig = (config) => {
+  return Object.assign({}, config, {
+    borderColor: 'yellow',
+    cursorColor: 'yellow',
+    css: `
+      ${config.css || ''}
+      .tabs_nav .tabs_list .tab_text {
+        color: yellow;
+      }
+      .tabs_nav .tabs_title {
+        color: yellow;
+      }
+    `
+  });
+}</code></pre>
+
+        <p>I grabbed the class names by inspecting the term with
+        Devtools, which you can trigger from <code>View -&gt; Toggle Developer Tools</code>.
+        When you do so, notice that some classes are automatically generated and 
+        followed by a random nonce (e.g.: <code>term_13hv8io</code>). Ignore those: they change with every new window!</p>
+
+        <p>Notice the emphasis on playing nice with other extensions.
+        Specificaly, we create a new object, extend only the keys we
+        are interested in, and we <b>compose</b> the CSS to preserve
+        the user's setting and that of other authors':</p>
+
+        <pre><code>return Object.assign({}, config, {
+  css: `
+    ${config.css || ''}
+    /* your css here */
+  `
 });</code></pre>
 
         <h3 id="hyperpower"><a href="#hyperpower">Example extension: Hyperpower</a></h3>
