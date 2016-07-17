@@ -427,7 +427,7 @@
           <div class="title"><b>Hyper</b>Term <span style="font-size: 12px; display: block; margin-top: 6px; color: #999">JS/HTML/CSS Terminal</span></div>
         </div>
         <div id="video">
-          <video id="vid" src="https://cdn.zeit.co/hyperterm/video.mp4" height="100%" autoplay />
+          <video id="vid" src="https://cdn.zeit.co/hyperterm/video.mp4" height="100%" autoplay muted></video>
         </div>
         <div id="arrow"><a href="#installation"><img src="static/arrow.svg" width="18" /></a></div>
       </div>
@@ -439,9 +439,9 @@
 
         <h2 id="hashtag-goals"><a href="#hashtag-goals">Project goals</a></h2>
 
-        <p> The goal of the project is to create a beautiful and extensible experience 
+        <p> The goal of the project is to create a beautiful and extensible experience
         for command-line interface users, built on open web standards.</p>
-        
+
         <p>In the beginning, our focus will be primarily around speed, stability and
         the development of the correct API for extension authors.</p>
 
@@ -553,7 +553,7 @@
         every possible customization point, we allow you to intercept
         and compose every bit of functionality!</p>
 
-        <p>The only knowledge that is therefore required to successfully 
+        <p>The only knowledge that is therefore required to successfully
         extend <code>HyperTerm</code> is that of its underlying open
         source libraries.</p>
 
@@ -591,7 +591,7 @@
               <td>
                 <p>Invoked when each window is created. If a plugin reloads,
                 it's invoked again with the existing windows.</p>
-                <p>Parameters:</p> 
+                <p>Parameters:</p>
                 <table>
                   <tbody>
                   <tr>
@@ -606,7 +606,7 @@
               <td>Electron</td>
               <td>
                 <p>Invoked when a plugin is removed by the user.</p>
-                <p>Parameters:</p> 
+                <p>Parameters:</p>
                 <table>
                   <tbody>
                     <tr>
@@ -642,7 +642,7 @@
                 <p>Invoked with the Electron's <code>Menu</code> template.
                 If a plugin reloads, it's called again and the menu
                 is refreshed.</p>
-                <p>Parameters:</p> 
+                <p>Parameters:</p>
                 <table>
                   <tbody>
                     <tr>
@@ -659,7 +659,7 @@
               <td>
                 <p>Invoked when a plugin is first loaded or subsequently
                 reloaded in each window.</p>
-                <p>Parameters:</p> 
+                <p>Parameters:</p>
                 <table>
                   <tr>
                     <tbody>
@@ -675,7 +675,7 @@
               <td>Renderer</td>
               <td>
                 <p>Invoked when a plugin is being unloaded.</p>
-                <p>Parameters:</p> 
+                <p>Parameters:</p>
                 <table>
                   <tr>
                     <tbody>
@@ -834,7 +834,7 @@
               <td>
                 <p>Invoked with the <code>React</code> <code>Component</code>
                 to decorate. Must return a Higher Order Component.</p>
-                <p>Parameters:</p> 
+                <p>Parameters:</p>
                 <table>
                   <tbody>
                     <tr>
@@ -857,7 +857,7 @@
 
         <h3 id="extensions-module-loading"><a href="#extensions-module-loading">Module loading</a></h3>
 
-        <p>The user can hot-load and hot-reload plugins by pressing 
+        <p>The user can hot-load and hot-reload plugins by pressing
         Command + R (refresh). Please strive to make plugins that don't
         require a complete restart of the application to work.</p>
 
