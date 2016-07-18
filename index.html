@@ -1054,6 +1054,32 @@
 
         <h3 id="additional-apis"><a href="#additional-apis">Additional APIs</a></h3>
 
+        <p>The Election <code>app</code> objects are extended with the following properties:</p>
+
+        <table>
+          <tbody>
+            <tr>
+              <td><code>config</code></td>
+              <td>An <code>Object</code> with the <code>config</code> block
+              from <code>~/.hyperterm.js</code>.</td>
+            </tr>
+            <tr>
+              <td><code>plugins</code></td>
+              <td>An <code>Object</code> with helpers for plugins.</td>
+            </tr>
+            <tr>
+              <td><code>winCount</code></td>
+              <td>An <code>Integer</code> that reports how many windows are open.</td>
+            </tr>
+            <tr>
+              <td><code>createWindow</code></td>
+              <td>A <code>Function</code> that will create a new window. Accepts an
+              optional <code>callback</code> that will be passed as the new window's
+              <code>init</code> callback.</td>
+          </tr>
+          </tbody>
+        </table>
+
         <p>Electron <code>BrowserWindow</code> objects are extended
         with the following parameters:</p>
 
