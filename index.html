@@ -503,6 +503,11 @@
               <td>The color of the caret in the terminal</td>
             </tr>
             <tr>
+              <td>"cursorShape"</td>
+              <td>"BLOCK"</td>
+              <td>The shape of the caret in the terminal. Available options are: 'BEAM', 'UNDERLINE', 'BLOCK'</td>
+            </tr>
+            <tr>
               <td>"foregroundColor"</td>
               <td>"#fff"</td>
               <td>The color of the main text of the terminal</td>
@@ -815,7 +820,7 @@
               </td>
               <td>Renderer</td>
               <td>
-                <p>A custom mapper for the state properties that 
+                <p>A custom mapper for the state properties that
                 <a href="https://github.com/zeit/hyperterm/tree/master/app/lib/containers" target="_blank">container components</a> receive. Note that for children components to
                 get these properties, you have to pass them down using the corresponding
                 methods (like <code>getTermProps</code>).</p><p> Must
