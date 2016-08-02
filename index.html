@@ -1215,7 +1215,7 @@
 
         <p>Let's walk through <a taret="_blank"
           href="https://github.com/zeit/hyperpower/blob/master/index.js">its code</a>.
-        <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyperterm/tree/master/app/lib/actions">here</a>.</p>
+        <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyperterm/tree/master/lib/actions">here</a>.</p>
 
         <pre><code>exports.middleware = (store) => (next) => (action) => {
   if ('SESSION_ADD_DATA' === action.type) {
