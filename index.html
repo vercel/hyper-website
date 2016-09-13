@@ -1035,7 +1035,7 @@
 
         <h3 id="actions-and-effects"><a href="#actions-and-effects">Actions and Effects</a></h3>
 
-        <p>All the <a href="https://github.com/zeit/hyperterm/tree/master/lib/actions"
+        <p>All the <a href="https://github.com/zeit/hyperterm/blob/master/lib/constants/sessions.js"
           target="_blank">Redux actions</a> are available for you to
         handle through your middleware and reducers. For an example, refer to the <a href="#hyperpower">Hyperpower</a> reference plugin.</p>
 
@@ -1215,7 +1215,7 @@
 
         <p>Let's walk through <a taret="_blank"
           href="https://github.com/zeit/hyperpower/blob/master/index.js">its code</a>.
-        <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyperterm/tree/master/lib/actions">here</a>.</p>
+        <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyperterm/blob/master/lib/constants/sessions.js">here</a>.</p>
 
         <pre><code>exports.middleware = (store) => (next) => (action) => {
   if ('SESSION_ADD_DATA' === action.type) {
