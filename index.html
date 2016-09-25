@@ -435,7 +435,7 @@
 
       <div id="content">
         <h2 id="installation"><a href="#installation">Installation</a></h2>
-        <p>Download for <a href="https://hyper-updates.now.sh/download/osx">macOS</a> and <a href="https://hyper-updates.now.sh/download/linux">linux</a> (ubuntu/debian). 
+        <p>Download for <a href="https://hyper-updates.now.sh/download/osx">macOS</a> and <a href="https://hyper-updates.now.sh/download/linux">linux</a> (ubuntu/debian).
         Windows build is coming very soon!</p>
 
         <h2 id="hashtag-goals"><a href="#hashtag-goals">Project goals</a></h2>
@@ -571,6 +571,16 @@
               <td>"bellSoundURL"</td>
               <td>"lib-resource:hterm/audio/bell"</td>
               <td>The URL of the bell sound to use, used only if "bell" is set to "SOUND"</td>
+            </tr>
+            <tr>
+              <td>"modifierKeys"</td>
+              <td>
+                {
+                  cmdIsMeta: false,
+                  altIsMeta: true
+                }
+              </td>
+              <td>Change the behaviour of modifier keys to act as meta key</td>
             </tr>
           </tbody>
         </table>
