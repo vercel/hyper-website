@@ -414,8 +414,8 @@
     <div id="main">
       <div id="header">
         <span><a target="_blank" href="https://zeit.co">&#9650;</a></span>
-        <span><a target="_blank" href="https://github.com/zeit/hyperterm/releases">Changelog</a></span>
-        <span><a target="_blank" href="https://github.com/zeit/hyperterm">GitHub</a></span>
+        <span><a target="_blank" href="https://github.com/zeit/hyper/releases">Changelog</a></span>
+        <span><a target="_blank" href="https://github.com/zeit/hyper">GitHub</a></span>
         <span>License: <b>MIT</b></span>
         <span><a href="#installation" class="download-link">Download</a></span>
       </div>
@@ -435,7 +435,7 @@
 
       <div id="content">
         <h2 id="installation"><a href="#installation">Installation</a></h2>
-        <p>Download for <a href="https://hyperterm-updates.now.sh/download/osx">macOS</a> and <a href="https://hyperterm-updates.now.sh/download/linux">linux</a> (ubuntu/debian). 
+        <p>Download for <a href="https://hyper-updates.now.sh/download/osx">macOS</a> and <a href="https://hyper-updates.now.sh/download/linux">linux</a> (ubuntu/debian). 
         Windows build is coming very soon!</p>
 
         <h2 id="hashtag-goals"><a href="#hashtag-goals">Project goals</a></h2>
@@ -458,7 +458,7 @@
 
         <pre><code>$ npm search hyper</code></pre>
 
-        <p>Then edit <code>~/.hyperterm.js</code> and add it to <code>plugins</code></p>
+        <p>Then edit <code>~/.hyper.js</code> and add it to <code>plugins</code></p>
 
         <pre><code>module.exports = {
 
@@ -470,12 +470,12 @@
 
 };</code></pre>
 
-        <p><code>HyperTerm</code> will show a notification when your modules are
-        installed to <code>~/.hyperterm_plugins`</code>.</p>
+        <p><code>Hyper</code> will show a notification when your modules are
+        installed to <code>~/.hyper_plugins`</code>.</p>
 
         <h2 id="cfg"><a href="#cfg">Configuration</a></h2>
 
-        <p>The <code>config</code> object seen above in <code>~/.hyperterm.js</code>
+        <p>The <code>config</code> object seen above in <code>~/.hyper.js</code>
         admits the following</p>
 
         <table class="config">
@@ -540,12 +540,12 @@
             <tr>
               <td>"colors"</td>
               <td>{ black: "#000000", red: "#ff0000", ... }</td>
-              <td>A list of overrides for the color palette. The names of the keys represent the "ANSI 16", which can all be seen <a href="https://github.com/zeit/hyperterm/blob/aaed99abac97a3d6b1766f194522a69e8a994bcb/lib/utils/colors.js">in the default config</a>.</td>
+              <td>A list of overrides for the color palette. The names of the keys represent the "ANSI 16", which can all be seen <a href="https://github.com/zeit/hyper/blob/aaed99abac97a3d6b1766f194522a69e8a994bcb/lib/utils/colors.js">in the default config</a>.</td>
             </tr>
             <tr>
               <td>"shell"</td>
               <td>""</td>
-              <td>A path to a custom shell to run when hyperterm starts a new session</td>
+              <td>A path to a custom shell to run when Hyper starts a new session</td>
             </tr>
             <tr>
               <td>"npmRegistry"</td>
@@ -580,7 +580,7 @@
         and compose every bit of functionality!</p>
 
         <p>The only knowledge that is therefore required to successfully
-        extend <code>HyperTerm</code> is that of its underlying open
+        extend <code>Hyper</code> is that of its underlying open
         source libraries.</p>
 
         <p>Your module has to expose at least one of these methods:.</p>
@@ -848,7 +848,7 @@
               <td>Renderer</td>
               <td>
                 <p>A custom mapper for the state properties that
-                <a href="https://github.com/zeit/hyperterm/tree/master/lib/containers" target="_blank">container components</a> receive. Note that for children components to
+                <a href="https://github.com/zeit/hyper/tree/master/lib/containers" target="_blank">container components</a> receive. Note that for children components to
                 get these properties, you have to pass them down using the corresponding
                 methods (like <code>getTermProps</code>).</p><p> Must
                 return an extended object of the map passsed.</p>
@@ -936,8 +936,8 @@
         <p>In the future we might do this automatically.</p>
 
         <p>When developing, you can add your plugin to
-        <code>~/.hyperterm_plugins/local</code> and then specify it
-        under the <code>localPlugins</code> array in <code>~/.hyperterm.js</code>.
+        <code>~/.hyper_plugins/local</code> and then specify it
+        under the <code>localPlugins</code> array in <code>~/.hyper.js</code>.
 
         We load new plugins:
         <ul>
@@ -950,7 +950,7 @@
         <p>The process of reloading involves</p>
         <ul>
           <li>Running <code>npm prune</code> and <code>npm install</code>
-            in <code>~/.hyperterm_plugins</code>.</li>
+            in <code>~/.hyper_plugins</code>.</li>
           <li>Pruning the <code>require.cache</code> in both electron
             and the renderer process</li>
           <li>Invoking <code>on*<code> methods on the existing instances
@@ -967,7 +967,7 @@
         <h3 id="decorating-components"><a href="#decorating-components">Decorating components</a></h3>
 
         <p>We give you the ability to provide a higher order component
-        for every piece of the <code>HyperTerm</code> UI.<br> Its structure
+        for every piece of the <code>Hyper</code> UI.<br> Its structure
         is as follows:</p>
 
         <pre><code>&lt;HyperTerm&gt;
@@ -1040,7 +1040,7 @@
 
         <h3 id="actions-and-effects"><a href="#actions-and-effects">Actions and Effects</a></h3>
 
-        <p>All the <a href="https://github.com/zeit/hyperterm/tree/master/lib/actions"
+        <p>All the <a href="https://github.com/zeit/hyper/tree/master/lib/actions"
           target="_blank">Redux actions</a> are available for you to
         handle through your middleware and reducers. For an example, refer to the <a href="#hyperpower">Hyperpower</a> reference plugin.</p>
 
@@ -1081,7 +1081,7 @@
 
         <h3 id="hterm"><a href="#hterm">The underlying terminal</a></h3>
 
-        <p><code>HyperTerm</code> achieves a lot of its speed and functionality
+        <p><code>Hyper</code> achieves a lot of its speed and functionality
         thanks to the power of <a target="_blank" href="https://chromium.googlesource.com/apps/libapps/+/master/hterm">hterm</a> underneath,
         the terminal emulator of the Chromium project.</p>
 
@@ -1098,7 +1098,7 @@
             <tr>
               <td><code>config</code></td>
               <td>An <code>Object</code> with the <code>config</code> block
-              from <code>~/.hyperterm.js</code>.</td>
+              from <code>~/.hyper.js</code>.</td>
             </tr>
             <tr>
               <td><code>plugins</code></td>
@@ -1220,7 +1220,7 @@
 
         <p>Let's walk through <a taret="_blank"
           href="https://github.com/zeit/hyperpower/blob/master/index.js">its code</a>.
-        <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyperterm/tree/master/lib/actions">here</a>.</p>
+        <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyper/tree/master/lib/actions">here</a>.</p>
 
         <pre><code>exports.middleware = (store) => (next) => (action) => {
   if ('SESSION_ADD_DATA' === action.type) {
