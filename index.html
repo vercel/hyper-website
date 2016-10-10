@@ -152,7 +152,7 @@
       #loading:before {
         content: 'Loading...';
         position: absolute;
-        display: 'block';
+        display: block;
         left: 0;
         top: 50%;
         right: 0;
@@ -861,7 +861,7 @@
                 <a href="https://github.com/zeit/hyper/tree/master/lib/containers" target="_blank">container components</a> receive. Note that for children components to
                 get these properties, you have to pass them down using the corresponding
                 methods (like <code>getTermProps</code>).</p><p> Must
-                return an extended object of the map passsed.</p>
+                return an extended object of the map passed.</p>
                 <table>
                   <tbody>
                     <tr>
@@ -887,7 +887,7 @@
               <td>Renderer</td>
               <td>
                 <p>A custom mapper for the dispatch properties. Must
-                return an extended object of the map passsed.</p>
+                return an extended object of the map passed.</p>
                 <table>
                   <tbody>
                     <tr>
@@ -1044,7 +1044,7 @@
         <pre><code>render () {
   const customChildren = Array.from(this.props.customChildren)
     .concat(&lt;p&gt;My new child&lt;/p&gt;);
-  return &lt;Tab {...this.props} customChidren={customChildren} /&gt;
+  return &lt;Tab {...this.props} customChildren={customChildren} /&gt;
 }</code></pre>
 
 
@@ -1210,7 +1210,7 @@
         followed by a random nonce (e.g.: <code>term_13hv8io</code>). Ignore those: they change with every new window!</p>
 
         <p>Notice the emphasis on playing nice with other extensions.
-        Specificaly, we create a new object, extend only the keys we
+        Specifically, we create a new object, extend only the keys we
         are interested in, and we <b>compose</b> the CSS to preserve
         the user's setting and that of other authors':</p>
 
@@ -1228,7 +1228,7 @@
 
         <p style="text-align: center"><img src="https://cloud.githubusercontent.com/assets/13041/16820268/13c9bfe6-4905-11e6-8fe4-baf8fc8d9293.gif" width="457" height="340" /></p>
 
-        <p>Let's walk through <a taret="_blank"
+        <p>Let's walk through <a target="_blank"
           href="https://github.com/zeit/hyperpower/blob/master/index.js">its code</a>.
         <br>First, we intercept the Redux action <code>SESSION_ADD_DATA</code>. See the whole list of them <a target="_blank" href="https://github.com/zeit/hyper/tree/master/lib/actions">here</a>.</p>
 
