@@ -1,7 +1,7 @@
 {
-  "name": "hyperterm-website",
+  "name": "hyper-website",
   "version": "0.0.1",
-  "description": "The official website for hyperterm",
+  "description": "The official website for hyper.app",
   "dependencies": {
     "micro-list": "latest"
   },
