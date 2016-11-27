@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "The official website for hyper.app",
   "dependencies": {
-    "micro-list": "latest"
+    "list": "latest"
   },
   "scripts": {
     "start": "list . -c 5"
