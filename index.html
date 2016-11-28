@@ -33,6 +33,7 @@
         top: 15px;
         right: 20px;
         z-index: 10000;
+        display: flex;
       }
 
       #header span {
@@ -41,13 +42,20 @@
           "Segoe UI", "Roboto", "Oxygen",
           "Ubuntu", "Cantarell", "Fira Sans",
           "Droid Sans", "Helvetica Neue", sans-serif;
-        display: inline-block;
+        display: flex;
+        align-items: center;
         margin-right: 10px;
       }
 
       #header a {
         color: #999;
         text-decoration: none;
+      }
+
+      #header a img {
+        height: 16px;
+        margin-left: 6px;
+        margin-right: 4px;
       }
 
       #header a:hover {
@@ -101,37 +109,71 @@
         max-width: 100%;
       }
 
-      #arrow {
+      #top .top-content {
         position: absolute;
-        left: 50%;
-        margin-left: -9px;
         bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
         opacity: 0;
         animation-name: arrow-appear;
-        animation-delay: 5s;
+        animation-delay: 2s;
         animation-duration: 500ms;
         animation-timing-function: ease;
         animation-fill-mode: forwards;
       }
 
+      .top-download {
+        position: relative;
+        bottom: 75px;
+        font-family: -apple-system, BlinkMacSystemFont,
+          "Segoe UI", "Roboto", "Oxygen",
+          "Ubuntu", "Cantarell", "Fira Sans",
+          "Droid Sans", "Helvetica Neue", sans-serif;
+      }
+
+      .download-button {
+        border-radius: 5px;
+        background: #50E3C2;
+        color: #494949;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        padding: 0 20px;
+        margin-bottom: 10px;
+        text-decoration: none;
+      }
+
+      .download-button img {
+        margin-right: 10px;
+      }
+
+      .download-button strong {
+        color: #000000;
+      }
+
+      #arrow {
+        position: absolute;
+        left: 50%;
+        margin-left: -9px;
+        bottom: 20px;
+      }
+
       @keyframes arrow-appear {
         from {
-          transform: translateY(-20px);
           opacity: 0;
         }
         to {
-          transform: translateY(0px);
-          opacity: .6;
+          bottom: 0;
+          opacity: 1;
         }
       }
 
       @keyframes arrow-video-finish {
         from {
-          transform: translateY(-20px);
-          opacity: );
+          opacity: 0;
         }
         to {
-          transform: translateY(0px);
+          bottom: 0;
           opacity: 1;
         }
       }
@@ -190,13 +232,13 @@
         margin: auto;
       }
 
-      #content a {
+      #content a, .other-downloads a {
         color: #FF2E88;
         text-decoration: none;
         border-bottom: 1px solid #FF2E88;
       }
 
-      #content a:hover {
+      #content a:hover, .other-downloads a:hover {
         background: #FF2E88;
         color: #fff;
       }
@@ -416,8 +458,12 @@
         <span><a target="_blank" href="https://zeit.co">&#9650;</a></span>
         <span><a target="_blank" href="https://github.com/zeit/hyper/releases">Changelog</a></span>
         <span><a target="_blank" href="https://github.com/zeit/hyper">GitHub</a></span>
-        <span>License: <b>MIT</b></span>
-        <span><a href="#installation" class="download-link">Download</a></span>
+        <span>License:&nbsp;<b>MIT</b></span>
+        <span>Download for:
+          <a href="#installation" class="download-link"><img src="static/apple-logo.svg"/></a>
+          <a href="#installation" class="download-link"><img src="static/windows-logo.svg"/></a>
+          <a href="#installation" class="download-link"><img src="static/linux-logo.svg"/></a>
+        </span>
       </div>
 
       <div id="top">
@@ -430,7 +476,19 @@
         <div id="video">
           <video id="vid" src="https://cdn.zeit.co/hyper/hyperapp.mp4" height="100%" autoplay muted></video>
         </div>
-        <div id="arrow"><a href="#installation"><img src="static/arrow.svg" width="18" /></a></div>
+        <div class="top-content">
+          <div class="top-download">
+            <a href class="download-button">
+              <img src="static/windows-logo.svg"/>
+              <span>
+                <strong>Download Hyper</strong> for <strong>Windows</strong>
+              </span>
+            </a>
+            <span class="other-downloads">Download for <a href="#">Mac</a> or <a href="#">Linux</a></span>
+          </div>
+
+          <div id="arrow"><a href="#installation"><img src="static/arrow.svg" width="18" /></a></div>
+        </div>
       </div>
 
       <div id="content">
@@ -1319,8 +1377,8 @@ exports.mapTermsState = (state, map) => {
     <script>
       document.getElementById('vid').playbackRate = 1.7;
       document.getElementById('vid').onended = function () {
-        document.getElementById('arrow').style.animationDelay = '100ms';
-        document.getElementById('arrow').style.animationName = 'arrow-video-finish';
+        document.getElementById('top-content').style.animationDelay = '100ms';
+        document.getElementById('top-content').style.animationName = 'arrow-video-finish';
       }
     </script>
   </body>
