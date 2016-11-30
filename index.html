@@ -141,6 +141,11 @@
         padding: 0 20px;
         margin-bottom: 10px;
         text-decoration: none;
+        transition: background .12s ease-in-out;
+      }
+
+      .download-button:hover {
+        background: #72EBD0;
       }
 
       .download-button svg {
@@ -309,6 +314,33 @@
         vertical-align: top;
         border: 1px solid #444;
         line-height: 15px;
+        position: relative;
+      }
+
+      #content table td.highlighted:after {
+        position: absolute;
+        content: "";
+        border: 1px solid #50E3C2;
+        width: 100%;
+        height: 100%;
+        top: -1px;
+        left: -1px;
+        pointer-events: none;
+      }
+
+      #content table td.highlighted a {
+        color: #50E3C2;
+        border-bottom: 1px solid currentColor;
+      }
+
+      #content table td.highlighted a:hover {
+        background: #50E3C2;
+        color: black;
+      }
+
+      #content table td.invisible-top-left {
+        border-top: 0;
+        border-left: 0;
       }
 
       #content td {
@@ -360,6 +392,10 @@
 
       #content p b {
         color: #fff;
+      }
+
+      #content .offset-header {
+        margin-top: -44px;
       }
 
       @media screen and (max-height: 500px) {
@@ -496,8 +532,28 @@
 
       <div id="content">
         <h2 id="installation"><a href="#installation">Installation</a></h2>
-        <p>Download for <a href="https://hyper-updates.now.sh/download/osx">macOS</a> and <a href="https://hyper-updates.now.sh/download/linux">Linux</a> (ubuntu/debian).
-        Windows build is coming very soon!</p>
+
+        <table class="offset-header">
+          <tr>
+            <td class="invisible-top-left"></td>
+            <td>32-bit</td>
+            <td>64-bit</td>
+          </tr>
+          <tr>
+            <td>macOS</td>
+            <td colspan="2" class="highlighted"><a href="#">DOWNLOAD</a></td>
+          </tr>
+          <tr>
+            <td>Windows</td>
+            <td><a href="#">DOWNLOAD</a></td>
+            <td><a href="#">DOWNLOAD</a></td>
+          </tr>
+          <tr>
+            <td>Linux</td>
+            <td><a href="#">DOWNLOAD</a></td>
+            <td><a href="#">DOWNLOAD</a></td>
+          </tr>
+        </table>
 
         <h2 id="hashtag-goals"><a href="#hashtag-goals">Project goals</a></h2>
 
