@@ -1505,7 +1505,7 @@ exports.mapTermsState = (state, map) => {
         var downloadButton = document.getElementsByClassName('download-button')[0];
         var downloadButtonText = document.getElementById('download-button-text');
 
-        if (/Mac/.test(userAgent)) {
+        if (/Mac/.test(userAgent) && !/iPhone/.test(userAgent) && !/iPad/.test(userAgent)) {
           downloadButton.setAttribute('href', 'https://hyper-updates.now.sh/download/mac');
           downloadButtonText.innerHTML += ' for <strong>macOS</strong>';
           document.getElementById('td-mac-os').classList.add('highlighted');
@@ -1515,7 +1515,7 @@ exports.mapTermsState = (state, map) => {
           downloadButtonText.innerHTML += ' for <strong>Windows</strong>';
           document.getElementById('td-win').classList.add('highlighted');
           document.getElementById('windows-icon').classList.remove('is-hidden');
-        } else if (/Linux/.test(userAgent)) {
+        } else if (/Linux/.test(userAgent) && !/Android/.test(userAgent)) {
           document.getElementById('linux-icon').classList.remove('is-hidden');
           if (/Ubuntu/.test(userAgent)) { // needs to be improved with other debian distros
             downloadButton.setAttribute('href', 'https://hyper-updates.now.sh/download/linux_deb');
@@ -1532,6 +1532,7 @@ exports.mapTermsState = (state, map) => {
           }
         } else {
           document.getElementById('fallback-icon').classList.remove('is-hidden');
+          document.getElementsByClassName('other-downloads')[0].classList.add('is-hidden');
         }
       });
     </script>
