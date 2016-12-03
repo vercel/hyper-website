@@ -358,7 +358,7 @@
         transition: opacity 0.3s ease;
       }
 
-      #content #installation-table td a:hover + img {
+      #content #installation-table td a:hover img {
         opacity: 1;
       }
 
@@ -368,6 +368,15 @@
 
       #content #installation-table {
         color: #FFF;
+      }
+
+      #content #installation-table td[id^="td"] {
+        padding: 0;
+      }
+
+      #content #installation-table a {
+        display: block;
+        padding: 10px;
       }
 
       #content td.soon {
@@ -586,40 +595,35 @@
           <tr>
             <td><b>macOS</b> (.dmg)</td>
             <td id="td-mac-os" colspan="2">
-              <a href="https://hyper-updates.now.sh/download/mac">DOWNLOAD</a>
-              <img src="static/download-icon.svg"/></a>
+              <a href="https://hyper-updates.now.sh/download/mac">DOWNLOAD <img src="static/download-icon.svg"/></a>
             </td>
           </tr>
           <tr>
             <td><b>Windows</b> (.exe)</td>
             <td class="soon">COMING SOON</td>
             <td id="td-win">
-              <a href="https://hyper-updates.now.sh/download/win">DOWNLOAD</a>
-              <img src="static/download-icon.svg"/>
+              <a href="https://hyper-updates.now.sh/download/win">DOWNLOAD <img src="static/download-icon.svg"/></a>
             </td>
           </tr>
           <tr>
             <td><b>Debian</b> (.deb)</td>
             <td class="soon">COMING SOON</td>
             <td id="td-debian">
-              <a href="https://hyper-updates.now.sh/download/linux_deb">DOWNLOAD</a>
-              <img src="static/download-icon.svg"/>
+              <a href="https://hyper-updates.now.sh/download/linux_deb">DOWNLOAD <img src="static/download-icon.svg"/></a>
             </td>
           </tr>
           <tr>
             <td><b>Fedora</b> (.rpm)</td>
             <td class="soon">COMING SOON</td>
             <td id="td-fedora">
-              <a href="https://hyper-updates.now.sh/download/linux_rpm">DOWNLOAD</a>
-              <img src="static/download-icon.svg"/>
+              <a href="https://hyper-updates.now.sh/download/linux_rpm">DOWNLOAD <img src="static/download-icon.svg"/></a>
             </td>
           </tr>
           <tr>
             <td><b>Other Linux distros</b> (.AppImage)</td>
             <td class="soon">COMING SOON</td>
             <td id="td-appimage" colspan="2">
-              <a href="https://hyper-updates.now.sh/download/linux">DOWNLOAD</a>
-              <img src="static/download-icon.svg"/>
+              <a href="https://hyper-updates.now.sh/download/linux">DOWNLOAD <img src="static/download-icon.svg"/></a>
             </td>
           </tr>
         </table>
