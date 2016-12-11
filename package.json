@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "The official website for hyper.app",
   "dependencies": {
-    "list": "latest"
+    "serve": "latest"
   },
   "scripts": {
-    "start": "list . -c 5"
+    "start": "serve . -c 5"
   }
 }
