@@ -1,3 +1,6 @@
+# DEPRECATED
+**We moved the [hyper.is](https://hyper.is) code to the main hyper repository. Please go there if you want to contribute: https://github.com/zeit/hyper/tree/master/website**
+
 # Hyper.app's site
 
 This is the static site that shows up when you access [hyper.is](https://hyper.is). It's hosted on [now](https://zeit.co/now/) and served using [serve](https://github.com/zeit/serve).
